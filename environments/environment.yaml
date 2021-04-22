@@ -1,0 +1,30 @@
+name: unet2DE
+channels:
+  - conda-forge
+  - anaconda
+  - defaults
+  - bioconda
+dependencies:
+  - python=3.6
+  - pip
+  - imagemagick
+  - pandas
+  - mkl=2019.3
+  - numpy=1.16
+  - scikit-image
+  - numba>=0.43.1
+  - pyqt
+  - scipy
+  - matplotlib
+  - snakemake
+  - pyside2
+  - matplotlib
+  - pip:
+    - mxnet-mkl<=1.5.1
+    - opencv_python
+    - pyqtgraph
+    - natsort
+    - google-cloud-storage
+    - tqdm
+    - cellpose>=0.0.1.21
+    - pandas==0.25.3
