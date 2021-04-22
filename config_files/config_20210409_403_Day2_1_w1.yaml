@@ -1,0 +1,50 @@
+exp: "FT_403_Day2_1_w1"
+
+#frames: "tmp/GFP20mtest.frame.info.csv"
+#connects: "tmp/GFP20mtest.connect.info.csv"
+storage: '/Volumes/FateTrack_2021/FateTrack_v2/select_data/timelapse/FT_403_D2_1_w1'
+
+experiment:
+  TLrows: 11
+  TLcolumns: 11
+  pxOverlap: 0.08
+  HCR_A594: '/Volumes/FateTrack_2021/FateTrack_v2/select_data/HCR/HCR_403_D2_1_w1_A594.tif'
+
+correction:
+  pixelCroppage: 2
+  backgroundImage: None #'background_correction_arrays/FT_403_D2_2_w2_A594_background.tif'
+  startFrame: 1
+  endFrame: 14
+
+segment:
+  flowThreshold: 0.6
+  cellProbabilityThreshold: -3.5
+  nuclearDiameter: 12.0
+
+minFlow:
+  maxCost: 32
+  openingCost: 25
+  greedy: False
+  nearestneighborDist: 4 #this is in units of nearest neighbor cell death
+  divisionScoreThreshold: 20
+
+HCR:
+  stitchTiles: 14
+  penaltyCoeff: 20
+  costInclusion: 1.25
+
+connection:
+  nnDist: 3
+  costMax: 35
+  mN_Intensity: 10
+  mN_Eccentricity: 4
+  mN_Area: 25
+  mN_Displacement: 1
+  mS_Area: 10
+  mS_Eccentricity: 2
+  mS_Intensity: 2
+  mS_Displacement: 1
+  MDAR_thresh: 0.75
+  SDis_thresh: 20.0
+  openingCost: 30
+  closingCost: 30
