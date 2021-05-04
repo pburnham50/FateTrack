@@ -1,5 +1,5 @@
-pathToSegs = "/Users/pburnham/Documents/Fatetracking_results/10min_B3_24/frames/"
-rlg_out_dir = "track_review_test/"
+pathToSegs = "/Users/pburnham/Documents/Fatetracking_results/H2BmC_10mintest/frames/"
+rlg_out_dir = "H2BmC_10min_test/"
 
 start_Frame = 0
 end_frame=11

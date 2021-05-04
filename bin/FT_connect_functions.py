@@ -220,7 +220,7 @@ def solveMinCostFlow(CostMatrix,mitosisCands):
                                 )).tolist()
 
 #    supply_amount = np.min([CostMatrix.shape[1]+len(mitosisCands),CostMatrix.shape[0]])#np.max([CostMatrix.shape[0],CostMatrix.shape[1]])
-    supply_amount = np.min([CostMatrix.shape[1],CostMatrix.shape[0]])#np.max([CostMatrix.shape[0],CostMatrix.shape[1]])
+    supply_amount = np.max([CostMatrix.shape[1],CostMatrix.shape[0]])#np.max([CostMatrix.shape[0],CostMatrix.shape[1]])
     supplies = np.concatenate(([supply_amount],np.repeat(0,np.sum(CostMatrix.shape)),[-1*supply_amount])).tolist()
 
 
@@ -275,9 +275,12 @@ def formatFinalConnections(Connections,FeatureFrame_t0,FeatureFrame_t1,timept_0,
     dup = u[c >1]
     splitFrames = connectedFrames[connectedFrames.start.isin(dup)]
     nonsplitFrames = connectedFrames[~connectedFrames.start.isin(dup)]
-    splitFrames.loc[:,"annotation"]="split"
-    birthFrames.loc[:,"annotation"]="birth"
-    deathFrames.loc[:,"annotation"]="death"
+    if (splitFrames.shape[0]>0):
+        splitFrames.loc[:,"annotation"]="split"
+    if (birthFrames.shape[0]>0):
+        birthFrames.loc[:,"annotation"]="birth"
+    if (deathFrames.shape[0]>0):
+        deathFrames.loc[:,"annotation"]="death"
     nonsplitFrames.loc[:,"annotation"]="pass"
 
     DetailFrames = pd.concat([nonsplitFrames,splitFrames,birthFrames,deathFrames])
