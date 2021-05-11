@@ -1,8 +1,8 @@
-pathToSegs = "/Users/pburnham/Documents/Fatetracking_results/H2BmC_10mintest/frames/"
-rlg_out_dir = "H2BmC_10min_test/"
+pathToSegs = "/Users/pburnham/Downloads/WellA1_XY01/frames/"
+rlg_out_dir = "Rbtest_test/"
 
 start_Frame = 0
-end_frame=11
+end_frame=90
 
 ## initial search parameter (larger will generate more candidates)
 track_frameExpCoeff = 1.75 #used to look for candidate future nuclei

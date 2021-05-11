@@ -281,7 +281,8 @@ def formatFinalConnections(Connections,FeatureFrame_t0,FeatureFrame_t1,timept_0,
         birthFrames.loc[:,"annotation"]="birth"
     if (deathFrames.shape[0]>0):
         deathFrames.loc[:,"annotation"]="death"
-    nonsplitFrames.loc[:,"annotation"]="pass"
+    if (nonsplitFrames.shape[0]>0):
+        nonsplitFrames.loc[:,"annotation"]="pass"
 
     DetailFrames = pd.concat([nonsplitFrames,splitFrames,birthFrames,deathFrames])
     DetailFrames = DetailFrames.reset_index(drop=True)
