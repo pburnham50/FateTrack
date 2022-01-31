@@ -31,6 +31,7 @@ classdef FTselector < handle
         cythreetwoButtonHandle
         yfptwoButtonHandle
         yfponeButtonHandle
+        yfponecyfivetwoButtonHandle
         latentButtonHandle
 
         axesHandle
@@ -58,7 +59,8 @@ classdef FTselector < handle
             p.cythreetwoButtonHandle =   uicontrol('Style','pushbutton','String','2-cy3','Position',[5,550,80,25]);
             p.yfponeButtonHandle =      uicontrol('Style','pushbutton','String','1-yfp','Position',[5,580,80,25]);
             p.cyfiveoneButtonHandle =     uicontrol('Style','pushbutton','String','1-cy5','Position',[5,610,80,25]);
-            p.latentButtonHandle =   uicontrol('Style','pushbutton','String','latent','Position',[5,640,80,25]);
+            p.yfponecyfivetwoButtonHandle = uicontrol('Style','pushbutton','String','1-yfp_2-cy5','Position',[5,640,80,25]);
+            p.latentButtonHandle =   uicontrol('Style','pushbutton','String','latent','Position',[5,670,80,25]);
 
             p.currentFramePopupHandle = uicontrol(p.figHandle,'Style','popupmenu');
             p.currentFramePopupHandle.Position = [5 5 200 25];
@@ -96,6 +98,7 @@ classdef FTselector < handle
             p.yfptwoButtonHandle.Callback ={@pc.setAnnotation}; % Needs fixing
             p.yfponeButtonHandle.Callback ={@pc.setAnnotation}; % Needs fixing
             p.latentButtonHandle.Callback ={@pc.setAnnotation}; % Needs fixing
+            p.yfponecyfivetwoButtonHandle.Callback ={@pc.setAnnotation};
 
             pc.showPointIDsHandle = p.showPointIDsHandle;
             pc.showMasksHandle = p.showMasksHandle;
