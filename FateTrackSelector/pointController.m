@@ -20,6 +20,7 @@ classdef pointController < handle
         currentFramePopupHandle
         showPointIDsHandle
         showMasksHandle
+        showCytoMasksHandle
         axesHandle
         linesHandle
         imageHandle
@@ -132,10 +133,15 @@ classdef pointController < handle
             if p.showPointIDsHandle.Value
                 idx = p.pointTableHandle.allPoints.pointID == theID;
                 annotation = p.pointTableHandle.allPoints.annotation(idx);
+                channel_file = char(p.currentFramePopupHandle.UserData{p.currentFramePopupHandle.Value});
+                channel_string = channel_file(1:end-4);
+                nuc_column = "nuc_Rd" + channel_string(1) + "_" + channel_string(2:end) + "_mean_intensity";
+                cyto_column = "cyto_Rd" + channel_string(1) + "_" + channel_string(2:end) + "_mean_intensity";
+                hcr_val_str = "nuc=" + p.pointTableHandle.allPoints.(nuc_column)(idx) + ", cyto=" + p.pointTableHandle.allPoints.(cyto_column)(idx);
                 if annotation ~= "none"
-                    label = num2str(theID)+" "+annotation;
+                    label = num2str(theID)+" "+annotation + " " + hcr_val_str;
                 else
-                    label = num2str(theID);
+                    label = num2str(theID) + " " + hcr_val_str;
                 end
             else
                 label = '';
@@ -146,6 +152,15 @@ classdef pointController < handle
             %%% NEEDS UPDATING TO PULL THE LABEL FROM THE POINTTABLE
             if p.showMasksHandle.Value
                 p.showImagesNoPointUpdateWithMask();
+            else
+                p.showImagesNoPointUpdate();
+            end
+        end
+        
+        function p = getCytoMask(p)
+            %%% NEEDS UPDATING TO PULL THE LABEL FROM THE POINTTABLE
+            if p.showCytoMasksHandle.Value
+                p.showImagesNoPointUpdateWithCytoMask();
             else
                 p.showImagesNoPointUpdate();
             end
@@ -162,6 +177,10 @@ classdef pointController < handle
 
         function p = showMasksPushed(p,src,eventdata)
             p.getMask()
+        end
+        
+        function p = showCytoMasksPushed(p,src,eventdata)
+            p.getCytoMask()
         end
 
         function p = deselectAllButtonPushed(p,src,eventdata)
@@ -226,6 +245,24 @@ classdef pointController < handle
             image1 = imread(p.currentFramePopupHandle.UserData{currFrame});
             image1 = imadjust(image1,[],[],0.1);
             image2 = imread(p.imageToFrameTable(p.imageToFrameTable.wavelength=="mask",:).fileName{end});
+            toggleImage = zeros([size(image1),3]);
+
+            outRGB = makeColoredImage(scale(im2double(image2)),[0 0.6797 0.9336]) + makeColoredImage(scale(im2double(image1)),[0.9648 0.5781 0.1172]) + toggleImage;
+
+            if ~isempty(p.imageHandle)
+                p.imageHandle.CData = outRGB;
+            else
+                p.imageHandle = imshow(outRGB,'Parent',p.axesHandle);
+            end
+
+        end
+        
+        function p = showImagesNoPointUpdateWithCytoMask(p)
+            currFrame = p.currentFramePopupHandle.Value;
+            p.imageToFrameTable = parseFiles()
+            image1 = imread(p.currentFramePopupHandle.UserData{currFrame});
+            image1 = imadjust(image1,[],[],0.1);
+            image2 = imread(p.imageToFrameTable(p.imageToFrameTable.wavelength=="cyto_mask",:).fileName{end});
             toggleImage = zeros([size(image1),3]);
 
             outRGB = makeColoredImage(scale(im2double(image2)),[0 0.6797 0.9336]) + makeColoredImage(scale(im2double(image1)),[0.9648 0.5781 0.1172]) + toggleImage;

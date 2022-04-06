@@ -13,8 +13,13 @@ for i = 1:length(dd)
       roundnum = C{end}(1);
       wl = C{end}(2:end);
     else
-    roundnum = "mask";
-    wl = "mask";
+        if C{1} == "cyto"
+            roundnum = "cyto_mask";
+            wl = "cyto_mask";
+        else
+            roundnum = "mask";
+            wl = "mask";
+        end
     end
 
     fileTable = [fileTable;{currFile,roundnum,wl}];

@@ -23,6 +23,7 @@ classdef FTselector < handle
         saveButtonHandle
         showPointIDsHandle
         showMasksHandle
+        showCytoMasksHandle
         currentFramePopupHandle
 
         noneButtonHandle
@@ -46,12 +47,13 @@ classdef FTselector < handle
             p.figHandle = figure('Visible','off','Position',[360,500,450,285]);
             p.figHandle.KeyPressFcn = @p.GUIWindowKeyPressFcn;
 
-            p.lassoButtonHandle = uicontrol('Style','pushbutton','String','LassoSelect','Position',[5,280,80,25]);
-            p.deselectAllButtonHandle = uicontrol('Style','pushbutton','String','deselect','Position',[5,310,80,25]);
-            p.connectParentButtonHandle = uicontrol('Style','pushbutton','String','region','Position',[5,340,80,25]);
-            p.saveButtonHandle = uicontrol('Style','pushbutton','String','save','Position',[5,370,80,25]);
-            p.showPointIDsHandle = uicontrol('Style','checkbox','String','showID','Position',[5,400,80,25]);
-            p.showMasksHandle = uicontrol('Style','checkbox','String','showMask','Position',[5,430,80,25]);
+            p.lassoButtonHandle = uicontrol('Style','pushbutton','String','LassoSelect','Position',[5,250,80,25]);
+            p.deselectAllButtonHandle = uicontrol('Style','pushbutton','String','deselect','Position',[5,280,80,25]);
+            p.connectParentButtonHandle = uicontrol('Style','pushbutton','String','region','Position',[5,310,80,25]);
+            p.saveButtonHandle = uicontrol('Style','pushbutton','String','save','Position',[5,340,80,25]);
+            p.showPointIDsHandle = uicontrol('Style','checkbox','String','showID','Position',[5,370,80,25]);
+            p.showMasksHandle = uicontrol('Style','checkbox','String','showMask','Position',[5,400,80,25]);
+            p.showCytoMasksHandle = uicontrol('Style','checkbox','String','showCytoMask','Position',[5,430,80,25]);
 
             p.noneButtonHandle =        uicontrol('Style','pushbutton','String','none','Position',[5,460,80,25]);
             p.yfptwoButtonHandle =         uicontrol('Style','pushbutton','String','2-yfp','Position',[5,490,80,25]);
@@ -90,6 +92,7 @@ classdef FTselector < handle
             p.saveButtonHandle.Callback ={@pc.saveButtonPushed}; % Needs fixing
             p.showPointIDsHandle.Callback ={@pc.showPointIDsPushed}; % Needs fixing
             p.showMasksHandle.Callback ={@pc.showMasksPushed}; % Needs fixing
+            p.showCytoMasksHandle.Callback ={@pc.showCytoMasksPushed}; % Needs fixing
 
             p.noneButtonHandle.Callback ={@pc.setAnnotation}; % Needs fixing
             p.cyfivetwoButtonHandle.Callback ={@pc.setAnnotation}; % Needs fixing
@@ -102,6 +105,7 @@ classdef FTselector < handle
 
             pc.showPointIDsHandle = p.showPointIDsHandle;
             pc.showMasksHandle = p.showMasksHandle;
+            pc.showCytoMasksHandle = p.showCytoMasksHandle;
             pc.saveFilename = inFilename;
 
 
