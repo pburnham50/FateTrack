@@ -137,7 +137,7 @@ classdef pointController < handle
                 channel_string = channel_file(1:end-4);
                 nuc_column = "nuc_Rd" + channel_string(1) + "_" + channel_string(2:end) + "_mean_intensity";
                 cyto_column = "cyto_Rd" + channel_string(1) + "_" + channel_string(2:end) + "_mean_intensity";
-                hcr_val_str = "nuc=" + p.pointTableHandle.allPoints.(nuc_column)(idx) + ", cyto=" + p.pointTableHandle.allPoints.(cyto_column)(idx);
+                hcr_val_str = "LPe5=" + p.pointTableHandle.allPoints.(nuc_column)(idx) + ", nuc=" + p.pointTableHandle.allPoints.(cyto_column)(idx);
                 if annotation ~= "none"
                     label = num2str(theID)+" "+annotation + " " + hcr_val_str;
                 else
