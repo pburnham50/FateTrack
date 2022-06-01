@@ -135,9 +135,9 @@ classdef pointController < handle
                 annotation = p.pointTableHandle.allPoints.annotation(idx);
                 channel_file = char(p.currentFramePopupHandle.UserData{p.currentFramePopupHandle.Value});
                 channel_string = channel_file(1:end-4);
+                lp_column = "lp_Rd" + channel_string(1) + "_" + channel_string(2:end) + "_mean_intensity";
                 nuc_column = "nuc_Rd" + channel_string(1) + "_" + channel_string(2:end) + "_mean_intensity";
-                cyto_column = "cyto_Rd" + channel_string(1) + "_" + channel_string(2:end) + "_mean_intensity";
-                hcr_val_str = "LPe5=" + p.pointTableHandle.allPoints.(nuc_column)(idx) + ", nuc=" + p.pointTableHandle.allPoints.(cyto_column)(idx);
+                hcr_val_str = "LPe5=" + p.pointTableHandle.allPoints.(lp_column)(idx) + ", nuc=" + p.pointTableHandle.allPoints.(nuc_column)(idx);
                 if annotation ~= "none"
                     label = num2str(theID)+" "+annotation + " " + hcr_val_str;
                 else
