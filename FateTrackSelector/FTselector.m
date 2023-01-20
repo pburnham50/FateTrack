@@ -23,7 +23,7 @@ classdef FTselector < handle
         saveButtonHandle
         showPointIDsHandle
         showMasksHandle
-        showCytoMasksHandle
+        showPointIDsWithInfoHandle
         currentFramePopupHandle
 
         noneButtonHandle
@@ -33,7 +33,7 @@ classdef FTselector < handle
         yfptwoButtonHandle
         yfponeButtonHandle
         yfponecyfivetwoButtonHandle
-        latentButtonHandle
+%         latentButtonHandle
 
         axesHandle
         imageHandle
@@ -52,17 +52,17 @@ classdef FTselector < handle
             p.connectParentButtonHandle = uicontrol('Style','pushbutton','String','region','Position',[5,310,80,25]);
             p.saveButtonHandle = uicontrol('Style','pushbutton','String','save','Position',[5,340,80,25]);
             p.showPointIDsHandle = uicontrol('Style','checkbox','String','showID','Position',[5,370,80,25]);
-            p.showMasksHandle = uicontrol('Style','checkbox','String','showMask','Position',[5,400,80,25]);
-            p.showCytoMasksHandle = uicontrol('Style','checkbox','String','showCytoMask','Position',[5,430,80,25]);
+            p.showPointIDsWithInfoHandle = uicontrol('Style','checkbox','String','showIDwithInfo','Position',[5,400,100,25]);
+            p.showMasksHandle = uicontrol('Style','checkbox','String','showMask','Position',[5,430,80,25]);
 
             p.noneButtonHandle =        uicontrol('Style','pushbutton','String','none','Position',[5,460,80,25]);
-            p.yfptwoButtonHandle =         uicontrol('Style','pushbutton','String','2-yfp','Position',[5,490,80,25]);
-            p.cyfivetwoButtonHandle =        uicontrol('Style','pushbutton','String','2-cy5','Position',[5,520,80,25]);
-            p.cythreetwoButtonHandle =   uicontrol('Style','pushbutton','String','2-cy3','Position',[5,550,80,25]);
-            p.yfponeButtonHandle =      uicontrol('Style','pushbutton','String','1-yfp','Position',[5,580,80,25]);
-            p.cyfiveoneButtonHandle =     uicontrol('Style','pushbutton','String','1-cy5','Position',[5,610,80,25]);
-            p.yfponecyfivetwoButtonHandle = uicontrol('Style','pushbutton','String','1-yfp_2-cy5','Position',[5,640,80,25]);
-            p.latentButtonHandle =   uicontrol('Style','pushbutton','String','latent','Position',[5,670,80,25]);
+            p.yfptwoButtonHandle =         uicontrol('Style','pushbutton','String','2_YFP','Position',[5,490,80,25]);
+            p.cyfivetwoButtonHandle =        uicontrol('Style','pushbutton','String','2_CY5','Position',[5,520,80,25]);
+            p.cythreetwoButtonHandle =   uicontrol('Style','pushbutton','String','2_CY3','Position',[5,550,80,25]);
+            p.yfponeButtonHandle =      uicontrol('Style','pushbutton','String','1_YFP','Position',[5,580,80,25]);
+            p.cyfiveoneButtonHandle =     uicontrol('Style','pushbutton','String','1_CY5','Position',[5,610,80,25]);
+            p.yfponecyfivetwoButtonHandle = uicontrol('Style','pushbutton','String','1_YFP_2_CY5','Position',[5,640,80,25]);
+%             p.latentButtonHandle =   uicontrol('Style','pushbutton','String','latent','Position',[5,670,80,25]);
 
             p.currentFramePopupHandle = uicontrol(p.figHandle,'Style','popupmenu');
             p.currentFramePopupHandle.Position = [5 5 200 25];
@@ -92,7 +92,7 @@ classdef FTselector < handle
             p.saveButtonHandle.Callback ={@pc.saveButtonPushed}; % Needs fixing
             p.showPointIDsHandle.Callback ={@pc.showPointIDsPushed}; % Needs fixing
             p.showMasksHandle.Callback ={@pc.showMasksPushed}; % Needs fixing
-            p.showCytoMasksHandle.Callback ={@pc.showCytoMasksPushed}; % Needs fixing
+            p.showPointIDsWithInfoHandle.Callback ={@pc.showPointIDsWithInfoPushed}; % Needs fixing
 
             p.noneButtonHandle.Callback ={@pc.setAnnotation}; % Needs fixing
             p.cyfivetwoButtonHandle.Callback ={@pc.setAnnotation}; % Needs fixing
@@ -100,12 +100,12 @@ classdef FTselector < handle
             p.cythreetwoButtonHandle.Callback ={@pc.setAnnotation}; % Needs fixing
             p.yfptwoButtonHandle.Callback ={@pc.setAnnotation}; % Needs fixing
             p.yfponeButtonHandle.Callback ={@pc.setAnnotation}; % Needs fixing
-            p.latentButtonHandle.Callback ={@pc.setAnnotation}; % Needs fixing
+%             p.latentButtonHandle.Callback ={@pc.setAnnotation}; % Needs fixing
             p.yfponecyfivetwoButtonHandle.Callback ={@pc.setAnnotation};
 
             pc.showPointIDsHandle = p.showPointIDsHandle;
             pc.showMasksHandle = p.showMasksHandle;
-            pc.showCytoMasksHandle = p.showCytoMasksHandle;
+            pc.showPointIDsWithInfoHandle = p.showPointIDsWithInfoHandle;
             pc.saveFilename = inFilename;
 
 
