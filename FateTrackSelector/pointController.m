@@ -91,8 +91,17 @@ classdef pointController < handle
 
             p.currPoints = images.roi.Point;
             for i = 1:height(Tcurr)
-                p.currPoints(i) = drawpoint(p.axesHandle,'Position',[Tcurr.xCoord(i) Tcurr.yCoord(i)],...
-                    'Color',[.4 .4 1],'SelectedColor','c');
+                % make point a different color if it is already annotated
+                % check for annotation
+                idx = p.pointTableHandle.allPoints.pointID == Tcurr.pointID(i);
+                annotation = p.pointTableHandle.allPoints.annotation(idx);
+                if annotation ~= "none" % different color for annotated point
+                    p.currPoints(i) = drawpoint(p.axesHandle,'Position',[Tcurr.xCoord(i) Tcurr.yCoord(i)],...
+                        'Color','magenta','SelectedColor','c');
+                else
+                    p.currPoints(i) = drawpoint(p.axesHandle,'Position',[Tcurr.xCoord(i) Tcurr.yCoord(i)],...
+                        'Color',[.4 .4 1],'SelectedColor','c');
+                end
                 p.currPoints(i).UserData = Tcurr.pointID(i);
                 p.currPoints(i).Label = getPtLabel(p,Tcurr.pointID(i));
             end
